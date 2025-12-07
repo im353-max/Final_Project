@@ -99,8 +99,8 @@ jobs:
         with:
           push: true
           tags: |
-            imanayath/Final_Project:latest
-            imanayath/Final_Project:${{ github.sha }}
+            imanayath/final_project:latest
+            imanayath/final_project:${{ github.sha }}
           platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,ref=imanayath/Final_Project:cache
+          cache-from: type=registry,ref=imanayath/final_project:cache
           cache-to: type=inline,mode=max
