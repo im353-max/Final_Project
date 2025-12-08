@@ -132,7 +132,7 @@ def view_calculation_page(request: Request, calc_id: str):
     """
     Page for viewing a single calculation (Read).
     
-    Part of the BREAD (Browse, Read, Edit, Add, Delete) pattern:
+    Part of the BREAD (Browse, Read, Edit, Add, Delete, Modulus) pattern:
     - This is the Read page
     
     Args:

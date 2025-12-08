@@ -11,7 +11,7 @@ It demonstrates several advanced patterns:
 4. Single Responsibility Principle - Each calculation type does one thing
 
 These models are designed for a calculator application that supports
-basic mathematical operations: addition, subtraction, multiplication, and division.
+basic mathematical operations: addition, subtraction, multiplication, division, and modulus.
 """
 
 from datetime import datetime
@@ -178,6 +178,7 @@ class AbstractCalculation:
             'subtraction': Subtraction,
             'multiplication': Multiplication,
             'division': Division,
+            'modulus': Modulus
         }
         calculation_class = calculation_classes.get(calculation_type.lower())
         if not calculation_class:
@@ -354,3 +355,41 @@ class Division(Calculation):
                 raise ValueError("Cannot divide by zero.")
             result /= value
         return result
+    
+class Modulus(Calculation):
+    """
+    Division calculation subclass.
+    
+    Implements sequential division starting from the first number.
+    Examples:
+        [10, 2, 5] -> 10 / 2 / 5 = 1
+        [100, 4, 5] -> 100 / 4 / 5 = 5
+        
+    Special case handling:
+        - Division by zero raises a ValueError
+    """
+    __mapper_args__ = {"polymorphic_identity": "modulus"}
+
+    def get_result(self) -> float:
+        """
+        Calculate the result of dividing the first value by all subsequent values.
+        
+        Takes the first number and divides by all remaining numbers sequentially.
+        Includes validation to prevent division by zero.
+        
+        Returns:
+            float: The result of the division sequence
+            
+        Raises:
+            ValueError: If inputs are not a list, if fewer than 2 numbers provided,
+                        or if attempting to divide by zero
+        """
+        if not isinstance(self.inputs, list):
+            raise ValueError("Inputs must be a list of numbers.")
+        if len(self.inputs) < 2:
+            raise ValueError("Inputs must be a list with at least two numbers.")
+        result = self.inputs[0]
+        for value in self.inputs[1:]:
+            result %= value
+        return result
+    
