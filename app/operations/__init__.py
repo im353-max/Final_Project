@@ -122,21 +122,21 @@ def divide(a: Number, b: Number) -> float:
 
 def modulus(a: Number, b: Number) -> Number:
     """
-    Subtract the second number from the first and return the result.
+    Modulus the second number from the first and return the result.
 
     Parameters:
-    - a (int or float): The number from which to subtract.
-    - b (int or float): The number to subtract.
+    - a (int or float): The number from which to modulus.
+    - b (int or float): The number to modulus.
 
     Returns:
     - int or float: The difference between a and b.
 
     Example:
-    >>> subtract(5, 3)
+    >>> modulus(5, 3)
     2
-    >>> subtract(5.5, 2)
+    >>> modulus(5.5, 2)
     3.5
     """
-    # Perform subtraction of b from a
-    result = a - b
+    # Perform modulus of b from a
+    result = a % b
     return result
